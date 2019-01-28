@@ -10,13 +10,14 @@ function getRepositories(){
 
 function displayRepositories(){
   let repos = JSON.parse(this.responseText)
+  console.log(Object.keys(repos[0]))
   let repoList = `<ul>${repos
     .map(
       r =>
         '<li>' +
-    '<a href="https://github.com/' + username + "/" + r.name + '">"' +
+    '<a href="https://github.com/' + r.owner.name + "/" + r.name + '">"' +
     r.name + '</a>' +
-    ' - <a href="#" data-repo="' +
+    ' - <a href="#" data-repository="' +
         r.name +
         '" onclick="getCommits(this)">Get Commits</a></li>'
     )
@@ -26,20 +27,24 @@ function displayRepositories(){
   }
 
   function getCommits(el) {
-  let name = el.dataset.repo;
+  let name = el.dataset.repository;
+  console.log(name)
   let req = new XMLHttpRequest();
   req.addEventListener('load', displayCommits);
+  console.log(Object.keys(el.dataset))
+  let username = el.dataset.username
+  let repository = el.dataset.repository
   req.open('GET', 'https://api.github.com/repos/octocat/' + name + '/commits');
   req.send();
 }
 
   function displayCommits(){
   let commits = JSON.parse(this.responseText);
-console.log(Object.keys(commits[0].commit))
+  console.log(Object.keys(commits[0].commit))
   let commitsList = `<ul>${commits
     .map(
       commit =>
-        '<li><strong>' + commit.commit.author.name + ' - <a href="https://github.com/' + commit.author.login + '">"' +
+        '<li><strong>' + commit.commit.author.name + ' - <a href="https://github.com/' + commit.author.login + '" data-username="' + commit.author.login + '" data-repository="' + commit.commit.name+ '">' +
         commit.author.login + " " +
         '</strong> - ' +
         commit.commit.message +
