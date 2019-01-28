@@ -35,14 +35,14 @@ function showRepositories(){
 
   function displayCommits(){
   let commits = JSON.parse(this.responseText);
-  //console.log(Object.keys(commits[0].author))
+console.log(Object.keys(commits[0].author))
   let commitsList = `<ul>${commits
     .map(
       commit =>
-        '<li><strong>' + '<a href="https://github.com/' + username + '">"' +
-        commit.author.login + " " + commit.author.name.value +
+        '<li><strong>' + commit.commit.author.name + ' - <a href="https://github.com/' + commit.author.login + '">"' +
+        commit.author.login + " " +
         '</strong> - ' +
-        commit.message.value +
+        commit.commit.message.value +
         '</li>'
     )
     .join('')}</ul>`;
