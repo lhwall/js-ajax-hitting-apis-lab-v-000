@@ -1,14 +1,14 @@
 // your code here
 function getRepositories(){
   const req = new XMLHttpRequest();
-  req.addEventListener('load', showRepositories);
+  req.addEventListener('load', displayRepositories);
   username = document.getElementById("username").value
   userURL = "https://api.github.com/users/" + username + "/repos"
   req.open("GET", userURL)
   req.send()
 }
 
-function showRepositories(){
+function displayRepositories(){
   let repos = JSON.parse(this.responseText)
   let repoList = `<ul>${repos
     .map(
@@ -35,14 +35,14 @@ function showRepositories(){
 
   function displayCommits(){
   let commits = JSON.parse(this.responseText);
-console.log(Object.keys(commits[0].author))
+console.log(Object.keys(commits[0].commit))
   let commitsList = `<ul>${commits
     .map(
       commit =>
         '<li><strong>' + commit.commit.author.name + ' - <a href="https://github.com/' + commit.author.login + '">"' +
         commit.author.login + " " +
         '</strong> - ' +
-        commit.commit.message.value +
+        commit.commit.message +
         '</li>'
     )
     .join('')}</ul>`;
