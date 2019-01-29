@@ -74,9 +74,7 @@ console.log(Object.keys(branches[0]))
 let branchesList = `<ul>${branches
   .map(
     branch =>
-      '<li><strong>' + branch.author.name + ' - <a href="https://github.com/' + branch.author.login + '" data-username="' + branch.author.login + '" data-repository="' + branch.name+ '">' +
-      branch.author.login + " " +
-      '</strong> </li>'
+      '<li><strong>' + branch.name +  '</strong> </li>'
   )
   .join('')}</ul>`;
 document.getElementById('details').innerHTML = branchesList;
