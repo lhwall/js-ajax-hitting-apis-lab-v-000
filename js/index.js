@@ -53,3 +53,11 @@ function displayRepositories(){
     .join('')}</ul>`;
   document.getElementById('details').innerHTML = commitsList;
 }
+
+function getBranches(){
+
+}
+
+function displayBranches(){
+
+}
