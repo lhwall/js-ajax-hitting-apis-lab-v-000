@@ -19,7 +19,9 @@ function displayRepositories(){
     r.name + '</a>' +
     ' - <a href="#" data-repository="' +
         r.name +
-        '" onclick="getCommits(this)">Get Commits</a></li>'
+        '" onclick="getCommits(this)">Get Commits</a> / <a href="#" data-repository="' +
+            r.name +
+            '" onclick="getBranches(this)">Get Branches</a></li>'
     )
     .join('')}</ul>`;
 
@@ -52,4 +54,28 @@ function displayRepositories(){
     )
     .join('')}</ul>`;
   document.getElementById('details').innerHTML = commitsList;
+}
+
+function getBranches(el) {
+let name = el.dataset.repository;
+console.log(name)
+let req = new XMLHttpRequest();
+req.addEventListener('load', displayBranches);
+console.log(Object.keys(el.dataset))
+let username = el.dataset.username
+let repository = el.dataset.repository
+req.open('GET', 'https://api.github.com/repos/octocat/' + name + '/branches');
+req.send();
+}
+
+function displayBranches(){
+let branches = JSON.parse(this.responseText);
+console.log(Object.keys(branches[0]))
+let branchesList = `<ul>${branches
+  .map(
+    branch =>
+      '<li><strong>' + branch.name +  '</strong> </li>'
+  )
+  .join('')}</ul>`;
+document.getElementById('details').innerHTML = branchesList;
 }
