@@ -10,12 +10,12 @@ function getRepositories(){
 
 function displayRepositories(){
   let repos = JSON.parse(this.responseText)
-  console.log(Object.keys(repos[0]))
+  console.log(repos[0].owner)
   let repoList = `<ul>${repos
     .map(
       r =>
         '<li>' +
-    '<a href="https://github.com/' + r.owner.name + "/" + r.name + '">"' +
+    '<a href="https://github.com/' + r.owner.login + "/" + r.name + '">"' +
     r.name + '</a>' +
     ' - <a href="#" data-repository="' +
         r.name +
