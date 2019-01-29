@@ -19,7 +19,7 @@ function displayRepositories(){
     r.name + '</a>' +
     ' - <a href="#" data-repository="' +
         r.name +
-        '" onclick="getCommits(this)">Get Commits</a></li>  - <a href="#" data-repository="' +
+        '" onclick="getCommits(this)">Get Commits</a></li> / <a href="#" data-repository="' +
             r.name +
             '" onclick="getBranches(this)">Get Branches</a></li>'
     )
